@@ -8,9 +8,13 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
+  // wtf is this for ?
     new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
   );
+
+  // need to add func for focus point
   const nextCard = () => {
+    // Not working ??
     setTimeout(
       () => setIndex(index < byDateDesc.length ? index + 1 : 0),
       5000
@@ -40,7 +44,9 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
+              {/* Need to add smth here on the '_' after funct focus point is set */}
               {byDateDesc.map((_, radioIdx) => (
+                // need to check the key for conflict
                 <input
                   key={`${event.id}`}
                   type="radio"

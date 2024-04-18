@@ -21,6 +21,7 @@ describe("When Events is created", () => {
           bubbles: true,
         })
       );
+      // Check why no active warning send when used
       await screen.findByText("En cours");
       await screen.findByText("Envoyer");
       expect(onSuccess).toHaveBeenCalled();
