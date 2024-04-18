@@ -30,6 +30,8 @@ export const DataProvider = ({ children }) => {
     if (data) return;
     getData();
   });
+
+  // add smth for the event card part ? maybe not here ??
   
   return (
     <DataContext.Provider
