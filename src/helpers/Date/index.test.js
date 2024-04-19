@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 
 describe("Date helper", () => {
     describe("When getMonth is called", () => {

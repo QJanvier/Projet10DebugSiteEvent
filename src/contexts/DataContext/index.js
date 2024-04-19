@@ -1,11 +1,5 @@
 import PropTypes from "prop-types";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 const DataContext = createContext({});
 
@@ -31,7 +25,12 @@ export const DataProvider = ({ children }) => {
     getData();
   });
 
-  // add smth for the event card part ? maybe not here ??
+  // added const for last in footer
+  const events = data?.events;
+  const sortedEvents = events?.sort((evtA, evtB) =>
+  new Date(evtA.Date) < new Date(evtB.date) ? 1 : -1 
+);
+const last = sortedEvents?.[0];
   
   return (
     <DataContext.Provider
@@ -39,6 +38,7 @@ export const DataProvider = ({ children }) => {
       value={{
         data,
         error,
+        last
       }}
     >
       {children}
