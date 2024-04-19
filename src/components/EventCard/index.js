@@ -3,20 +3,9 @@ import { getMonth } from "../../helpers/Date";
 
 import "./style.scss";
 
-const EventCard = ({
-  imageSrc,
-  imageAlt,
-  date = new Date(),
-  title,
-  label,
-  small = false,
-  ...props
-}) => (
-    <div
-      data-testid="card-testid"
-      className={`EventCard${small ? " EventCard--small" : ""}`}
-      {...props}
-    >
+// rearrange syntaxe ? to fix the const, to discuss with Mentor
+const EventCard = ({ imageSrc, imageAlt, date = new Date(), title, label, small = false, ...props }) => (
+    <div data-testid="card-testid" className={`EventCard${small ? " EventCard--small" : ""}`} {...props}>
       <div className="EventCard__imageContainer">
         <img data-testid="card-image-testid" src={imageSrc} alt={imageAlt} />
         <div className="EventCard__label">{label}</div>

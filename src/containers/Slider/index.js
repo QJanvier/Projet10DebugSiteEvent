@@ -7,32 +7,26 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
-  // wtf is this for ?
-    new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-  );
 
-  // need to add func for focus point
+  const byDateDesc = data?.focus.sort((evtA, evtB) => new Date(evtA.date) - new Date(evtB.date));
+
+  const indexRadio = (radioIdx) => {
+    setIndex(radioIdx);
+  }
+  
   const nextCard = () => {
-    // Not working ??
-    setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
-    );
+    setIndex((previousIndex) => (previousIndex < byDateDesc.length - 1 ? previousIndex + 1 : 0));
   };
+
   useEffect(() => {
-    nextCard();
-  });
+    const timer = setTimeout(nextCard, 3500);
+    return () => clearTimeout(timer);
+  }, [index, byDateDesc]);
   return (
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <>
-          <div
-            key={event.title}
-            className={`SlideCard SlideCard--${
-              index === idx ? "display" : "hide"
-            }`}
-          >
+      <>
+          <div key={event.title} className={`SlideCard SlideCard--${ index === idx ? "display" : "hide"}`}>
             <img src={event.cover} alt="forum" />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
@@ -44,14 +38,10 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {/* Need to add smth here on the '_' after funct focus point is set */}
-              {byDateDesc.map((_, radioIdx) => (
-                // need to check the key for conflict
-                <input
-                  key={`${event.id}`}
-                  type="radio"
-                  name="radio-button"
-                  checked={idx === radioIdx}
+            {/* //added focus in parameters for bullets */}
+              {byDateDesc.map((focus, radioIdx) => ( 
+                // change syntaxe idx to index and added onchange for focus
+                <input key={`${focus.title}`} type="radio" name={`radio-button-${radioIdx}`} checked={index === radioIdx} onChange={() => indexRadio(radioIdx)}
                 />
               ))}
             </div>
