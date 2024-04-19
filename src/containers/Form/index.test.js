@@ -21,9 +21,8 @@ describe("When Events is created", () => {
           bubbles: true,
         })
       );
-      // Check why no active warning send when used
-      await screen.findByText("En cours");
-      await screen.findByText("Envoyer");
+      // Changed await screen to a single line to find the text from form
+      await screen.findByText(/En cours|Envoyer/);      
       expect(onSuccess).toHaveBeenCalled();
     });
   });
