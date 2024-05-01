@@ -15,16 +15,13 @@ const EventList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
 
-  const filteredEvents = ((!type ? data?.events : data?.events) || []).filter((event, index) => {
-    if (
-      (!type || event.type === type) && // Added the type condition
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
+  const filteredEvents = data?.events.filter((event) => {
+    if (!type || event.type === type) {
       return true;
     }
     return false;
-  });
+    // slice to manage pagin
+  }).slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
 
   // reset page when change in type
   const changeType = (evtType) => {
