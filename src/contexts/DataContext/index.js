@@ -20,17 +20,16 @@ export const DataProvider = ({ children }) => {
       setError(err);
     }
   }, []);
+  
   useEffect(() => {
     if (data) return;
     getData();
-  });
+  }, [data]);
 
   // added const for last in footer
   const events = data?.events;
-  const sortedEvents = events?.sort((evtA, evtB) =>
-  new Date(evtA.Date) < new Date(evtB.date) ? 1 : -1 
-);
-const last = sortedEvents?.[0];
+  const sortedEvents = events?.sort((evtA, evtB) => new Date(evtA.Date) < new Date(evtB.date) ? 1 : -1 );
+  const last = sortedEvents?.[0];
   
   return (
     <DataContext.Provider

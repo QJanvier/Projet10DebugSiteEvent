@@ -10,16 +10,16 @@ const Slider = () => {
 
   const byDateDesc = data?.focus.sort((evtA, evtB) => new Date(evtA.date) - new Date(evtB.date));
 
-  const indexRadio = (radioIdx) => {
-    setIndex(radioIdx);
-  }
+  // const indexRadio = (radioIdx) => {
+  //   setIndex(radioIdx);
+  // }
   
   const nextCard = () => {
     setIndex((previousIndex) => (previousIndex < byDateDesc.length - 1 ? previousIndex + 1 : 0));
   };
 
   useEffect(() => {
-    const timer = setTimeout(nextCard, 3500);
+    const timer = setTimeout(nextCard, 5000);
     return () => clearTimeout(timer);
   }, [index, byDateDesc]);
   return (
@@ -38,11 +38,9 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-            {/* //added focus in parameters for bullets */}
               {byDateDesc.map((focus, radioIdx) => ( 
-                // change syntaxe idx to index and added onchange for focus
-                <input key={`${focus.date}`} type="radio" name={`radio-button-${radioIdx}`} checked={index === radioIdx} onChange={() => indexRadio(radioIdx)}
-                />
+                // change syntaxe idx to index and added onchange for bulletpoint
+                <input key={`${focus.title}`} type="radio" name={`radio-button-${radioIdx}`} checked={index === radioIdx}  readOnly />
               ))}
             </div>
           </div>
@@ -53,3 +51,7 @@ const Slider = () => {
 };
 
 export default Slider;
+
+
+
+// onChange={() => indexRadio(radioIdx)}
