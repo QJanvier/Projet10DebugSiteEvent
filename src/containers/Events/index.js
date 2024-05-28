@@ -15,7 +15,7 @@ const EventList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
 
-  const filteredEvents = data?.events.filter((event) => {
+  const filteredEvents = data?.events?.filter((event) => {
     if (!type || event.type === type) {
       return true;
     }
@@ -46,7 +46,7 @@ const EventList = () => {
             onChange={(value) => (value ? changeType(value) : changeType(null))}
           />
           <div data-testid="events-testid" id="events" className="ListContainer">
-            {filteredEvents.map((event) => (
+            {filteredEvents?.map((event) => (
               <Modal key={event.id} Content={<ModalEvent event={event} />}>
                 {({ setIsOpened }) => (
                   <EventCard
